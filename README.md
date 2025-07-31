@@ -158,6 +158,27 @@ and then watching ESPHome logs for data:
 
 ![ESPHome log](/images/scan_log.png)
 
+### MQTT Usage
+
+If you want to use MQTT with or withat HA
+The solution is created as ESPHome component can use either HA API or MQTT (or both at the same time).
+MQTT config should be like:
+mqtt:
+  broker: 10.0.0.196
+  username: xxxxxx
+  password: xxxxxx
+
+If you plan to use only MQTT, you have to remove api: section from the configuration file.
+
+MQTT has a defined schema how it publish topics in order to support standard Homeassistant approach. It publishes two topics for each action to allow two-way communication - one contains a status of the item, the second one is then use to change the value of the item.
+
+For example:
+climate-bedroom/climate/bedroom/mode/state
+climate-bedroom/climate/bedroom/mode/command
+
+state just reports current state of the unit. If you want to change it, you have to publish value like off, cool, heat to topic climate-bedroom/climate/bedroom/mode/command
+
+
 ### ESPHome older than 2023.3.0
 
 There is a change in internal implementation of climate control in 2023.3.0 - the fan mode Quiet is implemented as regular fan mode. As a result, the implementation of Quiet mode as custom fan mode won't work anymore.
