@@ -66,6 +66,14 @@ api:
   encryption:
     key: !secret ha_enc_key
 
+mqtt:
+  broker: xx.xx.xx.xx
+  port: 1883
+  topic_prefix: living_room
+  discovery_retain: False
+  discover_ip: False
+  discovery: False
+
 ota:
   password: !secret ota_password
 
